@@ -1,0 +1,9 @@
+{
+    "OFF": 0,
+    "GREEN": 1,
+    "BLINKING_GREEN": 2, 
+    "RED": 3,
+    "BLINKING_RED": 4,
+    "YELLOW": 5,
+    "BLINKING_YELLOW": 6
+}

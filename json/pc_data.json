@@ -1,0 +1,157 @@
+{
+  "Cn": {
+    "note": "C Natural",
+    "color": "red",
+    "value": 0
+  },
+  "C+": {
+    "note": "C Half Sharp",
+    "color": "yellow",
+    "value": 1
+  },
+  "C#": {
+    "note": "C Sharp",
+    "color": "green",
+    "value": 2
+  },
+  "Db": {
+    "note": "D Flat",
+    "color": "green",
+    "value": 3
+  },
+  "Dd": {
+    "note": "D Half Flat",
+    "color": "yellow",
+    "value": 4
+  },
+  "Dn": {
+    "note": "D Natural",
+    "color": "green",
+    "value": 5
+  },
+  "D+": {
+    "note": "D Half Sharp",
+    "color": "yellow",
+    "value": 6
+  },
+  "D#": {
+    "note": "D Sharp",
+    "color": "green",
+    "value": 7
+  },
+  "Eb": {
+    "note": "E Flat",
+    "color": "red",
+    "value": 8
+  },
+  "Ed": {
+    "note": "E Half Flat",
+    "color": "yellow",
+    "value": 9
+  },
+  "En": {
+    "note": "E Natural",
+    "color": "red",
+    "value": 10
+  },
+  "E+": {
+    "note": "E Half Sharp",
+    "color": "yellow",
+    "value": 11
+  },
+  "Fd": {
+    "note": "F Half Flat",
+    "color": "yellow",
+    "value": 12
+  },
+  "Fn": {
+    "note": "F Natural",
+    "color": "green",
+    "value": 13
+  },
+  "F+": {
+    "note": "F Half Sharp",
+    "color": "yellow",
+    "value": 14
+  },
+  "F#": {
+    "note": "F Sharp",
+    "color": "green",
+    "value": 15
+  },
+  "Gb": {
+    "note": "G Flat",
+    "color": "green",
+    "value": 16
+  },
+  "Gd": {
+    "note": "G Half Flat",
+    "color": "yellow",
+    "value": 17
+  },
+  "Gn": {
+    "note": "G Natural",
+    "color": "red",
+    "value": 18
+  },
+  "G+": {
+    "note": "G Half Sharp",
+    "color": "yellow",
+    "value": 19
+  },
+  "G#": {
+    "note": "G Sharp",
+    "color": "green",
+    "value": 20
+  },
+  "Ab": {
+    "note": "A Flat",
+    "color": "green",
+    "value": 21
+  },
+  "Ad": {
+    "note": "A Half Flat",
+    "color": "yellow",
+    "value": 22
+  },
+  "An": {
+    "note": "A Natural",
+    "color": "green",
+    "value": 23
+  },
+  "A+": {
+    "note": "A Half Sharp",
+    "color": "yellow",
+    "value": 24
+  },
+  "A#": {
+    "note": "A Sharp",
+    "color": "green",
+    "value": 25
+  },
+  "Bb": {
+    "note": "B Flat",
+    "color": "green",
+    "value": 26
+  },
+  "Bd": {
+    "note": "B Half Flat",
+    "color": "yellow",
+    "value": 27
+  },
+  "Bn": {
+    "note": "B Natural",
+    "color": "green",
+    "value": 28
+  },
+  "B+": {
+    "note": "B Half Sharp",
+    "color": "yellow",
+    "value": 29
+  },
+  "Cd": {
+    "note": "C Half Flat",
+    "color": "yellow",
+    "value": 30
+  }
+}
