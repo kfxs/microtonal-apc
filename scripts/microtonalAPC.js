@@ -83,7 +83,7 @@ class MicrotonalAPC {
 
     noteOn(padNumber, velocity) {
         //Check if is a keyboard pad
-        if(padNumber >= 0 && padNumber <= 63) {
+        if(isPadBoard(padNumber)) {
             const currentNote = this.getCurrentNote(padNumber);
 
             if(!sustainedChord.has(currentNote) && !currentChord.has(currentNote)) {
@@ -101,7 +101,7 @@ class MicrotonalAPC {
             }
         }
         //Check if is a chord pad
-        else if(padNumber >= 82 && padNumber <= 89) {
+        else if(isVerticalBoard(padNumber)) {
             const index = padNumber - 82;
             let ledValue = 1;
 
@@ -146,7 +146,7 @@ class MicrotonalAPC {
             this.padColorOn(padNumber, 1);
         }
         //SUSTAIN
-        else if(padNumber == 98) {
+        else if(isShiftButton(padNumber)) {
             const allSounds = new Set([...currentChord, ...notesPresed]);
 
             for(const note of allSounds) {
@@ -224,7 +224,7 @@ class MicrotonalAPC {
     
     noteOff(padNumber){
         //Check if is a keyboard pad
-        if(padNumber >= 0 && padNumber <= 63) {
+        if(isPadBoard(padNumber)) {
             const currentNote = this.getCurrentNote(padNumber);
 
             if(!sustainedChord.has(currentNote) && !currentChord.has(currentNote) && notesPresed.has(currentNote)) {
@@ -235,7 +235,7 @@ class MicrotonalAPC {
             }
         }
         //Check if is a chord pad
-        else if(padNumber >= 82 && padNumber <= 89) {
+        else if(isVerticalBoard(padNumber)) {
             if(!this.isRecordChord) {
                 const index = padNumber - 82;
 
@@ -261,7 +261,7 @@ class MicrotonalAPC {
             this.isRecordChord = false;
             this.padColorOff(padNumber);
         }
-        else if(padNumber == 98) //SUSTAIN
+        else if(isShiftButton(padNumber)) //SUSTAIN
             this.isSustained = false;
         else if(padNumber == 71) //Clear SUSTAIN
             this.padColorOff(padNumber);        
@@ -300,18 +300,18 @@ class MicrotonalAPC {
     //-- Color methods
 
     fillAllPadsWithDefaultColor() {
-        for(let i = 0; i < TOTAL_KEYS; i++) 
+        for(let i = PAD_BOARD_MIN_VALUE; i <= PAD_BOARD_MAX_VALUE; i++) 
             this.keyboardPadColorOn(i);
 
-        for(let i = 64; i <= 71; i++) 
+        for(let i = HORIZONTAL_BOARD_MIN_VALUE; i <= HORIZONTAL_BOARD_MAX_VALUE; i++) 
             this.padColorOff(i);
         
-        for(let i = 82; i <= 89; i++) 
+        for(let i = VERTICAL_BOARD_MIN_VALUE; i <= VERTICAL_BOARD_MAX_VALUE; i++) 
             this.padColorOff(i);
     }
   
     clearAllColors() {
-        for(let i = 0; i < TOTAL_KEYS; i++)
+        for(let i = PAD_BOARD_MIN_VALUE; i <= PAD_BOARD_MAX_VALUE; i++)
             this.padColorOff(i);
     }
   

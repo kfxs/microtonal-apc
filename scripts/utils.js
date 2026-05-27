@@ -2,7 +2,6 @@ const NOTE_DATA_PATH = '../json/pc_data.json';
 const COLOR_MAP_PATH = '../json/color_map.json';
 const MIDLE_C_FREQUENCY = 261.63;
 const ENVELOPE_MAX_VOLUME_RANGE = 0.3;
-const TOTAL_KEYS = 64;
 const TOTAL_NUMBER_OF_VOICES = 10;
 
 const pcData = new Array(31);
