@@ -55,7 +55,7 @@ class MicrotonalAPC {
     }
 
 
-    getCurrentNote(padNumber) {
+    getPadNote(padNumber) {
         const adjustedPad = padNumber + keyOffset;
         const noteName = pcData[mod(adjustedPad, 31)].note;
         let noteOctave = Math.floor(adjustedPad / 31) + 4;
@@ -84,20 +84,24 @@ class MicrotonalAPC {
     noteOn(padNumber, velocity) {
         //Check if is a keyboard pad
         if(isPadBoard(padNumber)) {
-            const currentNote = this.getCurrentNote(padNumber);
+            const currentNote = this.getPadNote(padNumber);
+            let isPlayingAllowed = false;
 
             if(!sustainedChord.has(currentNote) && !currentChord.has(currentNote)) {
                 if(this.isSustained) {                    
                     addToSustained(currentNote);
                     this.keyboardPadBlinkingColorOn(padNumber);
+                    isPlayingAllowed = true;
                 }
-                else {
+                else if(!notesPressed.has(currentNote)) {
                     addToNotesPressed(currentNote);
                     this.padColorOff(padNumber);
                     this.emit("makePadActive", { padNumber: padNumber, value: true });
+                    isPlayingAllowed = true;  
                 }
 
-                this.playSound(padNumber);
+                if(isPlayingAllowed)
+                    this.playSound(padNumber);
             }
         }
         //Check if is a chord pad
@@ -111,13 +115,13 @@ class MicrotonalAPC {
                         if(!sustainedChord.has(note)) {
                             const currentPad = this.getPadNumberFromNote(note);
 
-                            if(!currentChord.has(note) && !notesPresed.has(note)) 
+                            if(!currentChord.has(note) && !notesPressed.has(note)) 
                                 this.playSound(currentPad);
 
                             addNoteToChord(note);
 
-                            if(notesPresed.has(note))
-                                removeFromNotesPresed(note);
+                            if(notesPressed.has(note))
+                                removeFromnotesPressed(note);
                             
                             if(currentPad >= 0 && currentPad <= 63) {
                                 this.padColorOff(currentPad);
@@ -147,7 +151,7 @@ class MicrotonalAPC {
         }
         //SUSTAIN
         else if(isShiftButton(padNumber)) {
-            const allSounds = new Set([...currentChord, ...notesPresed]);
+            const allSounds = new Set([...currentChord, ...notesPressed]);
 
             for(const note of allSounds) {
                 addToSustained(note);
@@ -155,7 +159,7 @@ class MicrotonalAPC {
                 if(currentChord.has(note))
                     removeNoteFromChord(note);
                 else
-                    removeFromNotesPresed(note);
+                    removeFromnotesPressed(note);
 
                 const currentPadNumber = this.getPadNumberFromNote(note);
                 
@@ -181,10 +185,10 @@ class MicrotonalAPC {
         }
         //Check if is pad offset key
         else if(padNumber >= 64 && padNumber <= 68) {
-            if(notesPresed.size > 0) {
-                for(const note of notesPresed) {
+            if(notesPressed.size > 0) {
+                for(const note of notesPressed) {
                     this.stopSound(note);
-                    removeFromNotesPresed(note);
+                    removeFromnotesPressed(note);
                 }
             }
 
@@ -225,12 +229,12 @@ class MicrotonalAPC {
     noteOff(padNumber){
         //Check if is a keyboard pad
         if(isPadBoard(padNumber)) {
-            const currentNote = this.getCurrentNote(padNumber);
+            const currentNote = this.getPadNote(padNumber);
 
-            if(!sustainedChord.has(currentNote) && !currentChord.has(currentNote) && notesPresed.has(currentNote)) {
+            if(!sustainedChord.has(currentNote) && !currentChord.has(currentNote) && notesPressed.has(currentNote)) {
                 this.keyboardPadColorOn(padNumber);
                 this.stopSound(currentNote);
-                removeFromNotesPresed(currentNote);
+                removeFromnotesPressed(currentNote);
                 this.emit("makePadActive", { padNumber: padNumber, value: false });
             }
         }
@@ -285,7 +289,7 @@ class MicrotonalAPC {
     //--- Sound handlers
 
     playSound(padNumber) {         
-        const currentNote = this.getCurrentNote(padNumber);
+        const currentNote = this.getPadNote(padNumber);
         const adjustedPad = padNumber + keyOffset;
 
         this.emit("playNote", { midiNumber: adjustedPad, noteName: currentNote });

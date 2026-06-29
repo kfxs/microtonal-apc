@@ -15,7 +15,7 @@ let isScoreShowed = false;
 let midiOutput = null;
 let keyOffset = 0;
 
-const notesPresed = new Set();
+const notesPressed = new Set();
 const currentChord = new Set();
 const sustainedChord = new Set();
 
@@ -51,12 +51,12 @@ function mod(n, m) {
 
 
 function addToNotesPressed(note){
-    notesPresed.add(note);
+    notesPressed.add(note);
 }
 
 
-function removeFromNotesPresed(note){
-    notesPresed.delete(note);
+function removeFromnotesPressed(note){
+    notesPressed.delete(note);
 }
 
 

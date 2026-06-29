@@ -9,7 +9,7 @@ class SheetMusic {
 
 
     drawMusic() {
-        const chordToVisualize = new Set([...notesPresed, ...currentChord, ...sustainedChord]);
+        const chordToVisualize = new Set([...notesPressed, ...currentChord, ...sustainedChord]);
 
         if(chordToVisualize.size > 0) {
             const VF = Vex.Flow;
@@ -21,31 +21,31 @@ class SheetMusic {
             let trebleVoices = [];
             let bassVoices = [];
 
-            let isTrebleData = false;
-            let isBassData = false;
+            let isTrebleDataContent = false;
+            let isBassDataContent = false;
 
             for(const item of chordToVisualize) {
                 const note = item + '/w';
                 const noteOctave = parseInt(item.slice(-1));
 
                 if(noteOctave >= 4) {
-                    isTrebleData = true;
+                    isTrebleDataContent = true;
                     trebleVoices.push(score.voice(score.notes(note, {clef: 'treble'})));
                 } else {
-                    isBassData = true;
+                    isBassDataContent = true;
                     bassVoices.push(score.voice(score.notes(note, {clef: 'bass'})));
                 }
             }
             
-            if(isTrebleData){
+            if(isTrebleDataContent){
                 system.addStave({ voices: trebleVoices }).addClef('treble').setEndBarType(VF.Barline.type.DOUBLE);
             }
 
-            if(isBassData) {
+            if(isBassDataContent) {
                 system.addStave({ voices: bassVoices }).addClef('bass').setEndBarType(VF.Barline.type.DOUBLE);
             }
 
-            if(isTrebleData && isBassData) {
+            if(isTrebleDataContent && isBassDataContent) {
                 system.addConnector(); 
             }
 
