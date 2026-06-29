@@ -10,5 +10,6 @@
     margin: 20px;
     padding-left: 25px;
     
-    background-color: lightgrey; 
+    background-color: lightgrey;
+    opacity: 0.9; 
 }

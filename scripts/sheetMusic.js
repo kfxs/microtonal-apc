@@ -3,11 +3,9 @@ class SheetMusic {
     constructor(){}
 
 
-
     updateScore() {
         this.drawMusic();
     }
-
 
 
     drawMusic() {
@@ -23,37 +21,36 @@ class SheetMusic {
             let trebleVoices = [];
             let bassVoices = [];
 
+            let isTrebleData = false;
+            let isBassData = false;
 
             for(const item of chordToVisualize) {
                 const note = item + '/w';
                 const noteOctave = parseInt(item.slice(-1));
 
-
-
-               //console.log(noteOctave)
-
-
-                //TODO: populate trebleVoices or bassVoices base on noteOctave
-
-                trebleVoices.push(score.voice(score.notes(note, {clef: 'treble'})));
-
-                
+                if(noteOctave >= 4) {
+                    isTrebleData = true;
+                    trebleVoices.push(score.voice(score.notes(note, {clef: 'treble'})));
+                } else {
+                    isBassData = true;
+                    bassVoices.push(score.voice(score.notes(note, {clef: 'bass'})));
+                }
             }
             
+            if(isTrebleData){
+                system.addStave({ voices: trebleVoices }).addClef('treble').setEndBarType(VF.Barline.type.DOUBLE);
+            }
 
-        
-            
-            system.addStave({ voices: trebleVoices }).addClef('treble').setEndBarType(VF.Barline.type.DOUBLE);
-            
-            //system.addStave({ voices: bassVoices }).addClef('bass').setEndBarType(VF.Barline.type.DOUBLE);
+            if(isBassData) {
+                system.addStave({ voices: bassVoices }).addClef('bass').setEndBarType(VF.Barline.type.DOUBLE);
+            }
 
+            if(isTrebleData && isBassData) {
+                system.addConnector(); 
+            }
 
-            //system.addConnector(); 
-            scoreEngraver.draw();
-
-
+           scoreEngraver.draw();
         }
-
     }
 
 
