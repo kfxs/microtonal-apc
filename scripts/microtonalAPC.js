@@ -281,8 +281,11 @@ class MicrotonalAPC {
         if(ccNumber == 56) {
             this.emit("setMasterVolume", { ccValue: value });
         }
-        else
+        else 
             console.log(`CONTROL_CHANGE-> CC:${ccNumber} | Value:${value}`);
+            
+
+        this.emit("setGuiSliderPosition", {ccNumber: ccNumber, value: value});
     }
 
 

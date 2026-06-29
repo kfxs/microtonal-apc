@@ -71,6 +71,13 @@ class ApcController {
         //--- VirtualApc2Gui connections
         this.virtualApc.on("makePadActive", data => { this.gui.makePadActive(data.padNumber, data.value); });
 
+
+
+
+        
+
+        this.virtualApc.on("setGuiSliderPosition", data => {   this.gui.setSliderPosition(data.ccNumber, data.value);     });
+
       
     }
 

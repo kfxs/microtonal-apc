@@ -242,7 +242,7 @@ class Slider {
         return (x >= this.thumbPositionX && x <= this.thumbPositionX + this.thumbWidth) && (y >= this.thumbPositionY && y <= this.thumbPositionY + this.thumbHeight);
     }
 
-    limitThumbY(targetThumbY){
+    limitThumbY(targetThumbY) {
         if(targetThumbY < this.thumbPositionY_MAX) {
             targetThumbY = this.thumbPositionY_MAX;
         }
@@ -252,5 +252,9 @@ class Slider {
         }
 
         return targetThumbY;
+    }
+
+    setThumbPosition(position) {
+        this.thumbPositionY = this.thumbPositionY_MIN + (this.thumbPositionY_MAX - this.thumbPositionY_MIN) * position;
     }
 }

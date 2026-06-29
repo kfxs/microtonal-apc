@@ -299,6 +299,13 @@ class ApcGui {
         }
     }
 
+    setSliderPosition(ccNumber, value) {
+        const sliderIndex = ccNumber - SLIDER_ONE_CC_NUMBER;
+        const position = value / 127;
+        
+        this.sliderBoard[sliderIndex].setThumbPosition(position);
+    }
+
 
     //--- Events handlers
 

@@ -3,6 +3,7 @@ const COLOR_MAP_PATH = '../json/color_map.json';
 const MIDLE_C_FREQUENCY = 261.63;
 const ENVELOPE_MAX_VOLUME_RANGE = 0.3;
 const TOTAL_NUMBER_OF_VOICES = 10;
+const SLIDER_ONE_CC_NUMBER = 48;
 
 const pcData = new Array(31);
 fillPcDataArray();
