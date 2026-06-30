@@ -31,6 +31,7 @@ class ApcController {
 
     updateController() {
         this.gui.drawController();
+        this.soundEngine.update();
     }
 
 

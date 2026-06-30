@@ -1,12 +1,15 @@
 class SoundEngine {
     constructor () {
         this.masterVolume = 1;
+        this.targetMasterVolume = this.masterVolume;
         
         this.oscillators = new Array(TOTAL_NUMBER_OF_VOICES);
         this.envelopes = new Array(TOTAL_NUMBER_OF_VOICES);
 
         this.activeVoices = [];
         this.noteToVoiceMap = {};
+
+        this.isAudioActive = false;
     }
 
 
@@ -23,6 +26,8 @@ class SoundEngine {
 
             this.envelopes[i].setInput(this.oscillators[i]);
         }
+
+        this.isAudioActive = true;
     }
 
 
@@ -66,11 +71,24 @@ class SoundEngine {
 
 
     setMasterVolume(ccValue) {
-        this.masterVolume = Math.pow(ccValue / 127, 2);
+        this.targetMasterVolume = Math.pow(ccValue / 127, 2);
+    }
 
-        for(let i = 0; i < TOTAL_NUMBER_OF_VOICES; i++)                
+    updateMasterVolume() {
+        const smoothingSpeed = 5;
+        const t = 1 - Math.exp(-smoothingSpeed * (deltaTime / 1000));
+
+        this.masterVolume += (this.targetMasterVolume - this.masterVolume) * t;
+
+        for(let i = 0; i < TOTAL_NUMBER_OF_VOICES; i++)  
             this.envelopes[i].mult(this.masterVolume);
     }
+
+    update(){
+        if(this.isAudioActive)
+            this.updateMasterVolume();
+    }
+
 
 
 }
