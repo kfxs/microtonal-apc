@@ -74,6 +74,7 @@ class SoundEngine {
         this.targetMasterVolume = Math.pow(ccValue / 127, 2);
     }
 
+    
     updateMasterVolume() {
         const smoothingSpeed = 5;
         const t = 1 - Math.exp(-smoothingSpeed * (deltaTime / 1000));
@@ -84,7 +85,8 @@ class SoundEngine {
             this.envelopes[i].mult(this.masterVolume);
     }
 
-    update(){
+
+    update() {
         if(this.isAudioActive)
             this.updateMasterVolume();
     }
